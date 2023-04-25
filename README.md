@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+#connex-one-technical-frontend
+frontend files for a technical task. this frontend displays server time each 30 seconds, and shows the difference between local time and the time of each server request. Prometheus metrics are also disdplayed for the latest server request and a loading state is shown at the top of the page when the server requests are occurring.
+
+/time - gets the current time in epoch seconds.
+/metrics - uses prometheus middleware that exposes metrics.
+
+find the backend here - [https://github.com/annoinspace/connex-one-technical-api](https://github.com/annoinspace/connex-one-technical-api)
+
+##Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
