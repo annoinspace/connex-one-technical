@@ -9,9 +9,27 @@
 #time-metrics-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 }
 
+#time-display-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 50vw;
+}
+
+#metrics-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  width: 50vw;
+}
+.current-difference {
+  display: flex;
+  gap: 20px;
+}
 #loading {
   height: 20vh;
   border: 2px solid red;

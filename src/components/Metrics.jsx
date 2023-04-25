@@ -1,5 +1,9 @@
 import React from "react"
 
 export default function Metrics() {
-  return <h1>Metrics</h1>
+  return (
+    <div id="metrics-wrapper">
+      <h1>Metrics</h1>
+    </div>
+  )
 }
