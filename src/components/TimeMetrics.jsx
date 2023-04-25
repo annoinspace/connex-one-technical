@@ -7,6 +7,7 @@ export default function TimeMetrics() {
   const [currentMetrics, setCurrentMetrics] = useState("")
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isFirstFetch, setIsFirstFetch] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -18,6 +19,7 @@ export default function TimeMetrics() {
 
   useEffect(() => {
     const fetchTime = async () => {
+      setLoading(true)
       const getCurrentTimeAsync = getCurrentTime()
       const currentServerTime = await getCurrentTimeAsync()
       setAllServerTimes((prevServerTimes) => [...prevServerTimes, currentServerTime])
@@ -26,6 +28,7 @@ export default function TimeMetrics() {
       const getCurrentMetricsAsync = getCurrentMetrics()
       const metrics = await getCurrentMetricsAsync()
       setCurrentMetrics(metrics)
+      setLoading(false)
     }
 
     if (isFirstFetch) {
@@ -51,32 +54,36 @@ export default function TimeMetrics() {
 
   return (
     <>
-      <div id="time-display-wrapper">
-        <h1>Time</h1>
+      {/* loading textonly shows when the fetch is occurring*/}
+      <div id="loading">{loading && <div id="loading-text">loading...</div>}</div>
+      <div id="time-and-metrics">
+        <div id="time-display-wrapper">
+          <h1>Time</h1>
 
-        {isFirstFetch && allServerTimes.length < 0 && (
-          <div className="current-difference" key={allServerTimes[0]}>
-            <div>Server Time {allServerTimes[0]}</div>
-          </div>
-        )}
-        {/* only after the first fetch we render the following */}
-        {!isFirstFetch && (
-          <>
-            <div className="flex-row">
-              <div>Server Time</div>
-              <div>Current Difference</div>
+          {isFirstFetch && allServerTimes.length < 0 && (
+            <div className="current-difference" key={allServerTimes[0]}>
+              <div>Server Time {allServerTimes[0]}</div>
             </div>
-            {allServerTimes.map((time) => (
-              <div className="current-difference" key={time}>
-                <div>{time}</div>
-
-                <div> {formatTimeDifference(currentTime, new Date(time * 1000))}</div>
+          )}
+          {/* only after the first fetch we render the following */}
+          {!isFirstFetch && (
+            <>
+              <div className="flex-row">
+                <div>Server Time</div>
+                <div>Current Difference</div>
               </div>
-            ))}
-          </>
-        )}
+              {allServerTimes.map((time) => (
+                <div className="current-difference" key={time}>
+                  <div>{time}</div>
+
+                  <div> {formatTimeDifference(currentTime, new Date(time * 1000))}</div>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+        <Metrics text={currentMetrics} />
       </div>
-      <Metrics text={currentMetrics} />
     </>
   )
 }

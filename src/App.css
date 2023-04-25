@@ -2,14 +2,17 @@
   max-width: 100vw;
   min-width: 100vw;
   height: 100vh;
-
   box-sizing: border-box;
 }
-
+#time-and-metrics {
+  display: flex;
+  justify-content: space-around;
+}
 #time-metrics-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  max-width: 100%;
 }
 
 #time-display-wrapper {
@@ -36,11 +39,18 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  gap: 50px;
+  gap: 20px;
   width: 350px;
   margin-bottom: 10px;
 }
 #loading {
   height: 20vh;
-  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#loading-text {
+  font-size: 50px;
 }
